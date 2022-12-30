@@ -8,9 +8,11 @@ except:
 
 from io import StringIO
 
-from pdfminer.pdfinterp import PDFResourceManager, process_pdf
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+# from pdfminer.pdfinterp import PDFResourceManager, process_pdf, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import  LAParams
+from pdfminer.pdfpage import PDFPage
 
 # 读取pdf的函数，返回内容
 def readPdf(pdf_file):
@@ -19,7 +21,11 @@ def readPdf(pdf_file):
     laparams = LAParams()
     device = TextConverter(rsrcmgr=rsrcmgr, outfp=retstr, laparams=laparams)
 
-    process_pdf(rsrcmgr=rsrcmgr, device=device, fp=pdf_file)
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    for page in PDFPage.get_pages(pdf_file, caching=True, check_extractable=True):
+        interpreter.process_page(page)
+
+    # process_pdf(rsrcmgr=rsrcmgr, device=device, fp=pdf_file)
     device.close()
 
     content = retstr.getvalue()
