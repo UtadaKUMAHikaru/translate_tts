@@ -1,0 +1,13 @@
+setup.py
+scripts/txt2epub
+txt2epub.egg-info/PKG-INFO
+txt2epub.egg-info/SOURCES.txt
+txt2epub.egg-info/dependency_links.txt
+txt2epub.egg-info/requires.txt
+txt2epub.egg-info/top_level.txt
+txt2epublib/__init__.py
+txt2epublib/templates/00_content.opf
+txt2epublib/templates/00_stylesheet.css
+txt2epublib/templates/00_toc.ncx
+txt2epublib/templates/item-br.html
+txt2epublib/templates/item.html
